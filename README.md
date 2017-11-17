@@ -53,3 +53,32 @@ var timer = setInterval(main, 3000);
 ```
 
 ----
+
+## girlspic(多玩美女)
+爬取多玩美女图片
+### 用到的库：
+```
+    "cheerio": "^1.0.0-rc.2",
+    "mkdirp": "^0.5.1",
+    "request": "^2.83.0"
+    fs模块
+```
+### 相关代码：
+```
+	request(url, function(error, response, body) {
+		if(!error && response.statusCode == 200) {
+            var datas = JSON.parse(body).html;
+            var $ = cheerio.load(datas);
+            $('img').each(function () {
+                var src = $(this).attr('src');
+                console.log('正在下载' + src);
+                download(src, dir, Math.floor(Math.random()*100000) + src.substr(-4,4));
+                console.log('下载完成');
+            })
+		}
+	});
+```
+
+----
+
+
